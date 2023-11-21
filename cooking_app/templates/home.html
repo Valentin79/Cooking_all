@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Добро пожаловать на кулинарный сайт!</h3>
+<br>
+<h5>Случайные рецепты:</h5>
+
+<ol>
+    {% for key, value in Recipes.items %}
+    {% if value.visible %}
+
+        <div class="card mb-3" style="height: 250px">
+            <div class="row g-0">
+                <div class="col-md-4" style="padding: 5px; max-width: 240px; max-height: 240px">
+                    <img class="img-fluid" src="{{ value.image.url }}" alt="image">
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ value.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ value.category }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ value.author }}</h6>
+                        <div class="overflow-auto" style="height: 90px">{{ value.description }}</div>
+                        <br>
+                        <a href="http://127.0.0.1:8000/view_recipe/{{ value.id }}" class="card-link">Подробнее про {{ value.title }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+</ol>
+{% endblock %}

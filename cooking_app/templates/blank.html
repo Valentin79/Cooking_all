@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ message }}
+<div class="border-top pt-3">
+    <a class="text-muted" href="{% url 'home' %}">Вернуться на главную.</a>
+  </div>
+
+{% endblock %}

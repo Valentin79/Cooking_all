@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article class="card mb-3" style="padding: 10px; background-color:GhostWhite;">
+
+    {% if Dict.visible %}
+        <div class="d-flex justify-content-start" style="width: 100%">
+
+            <div class="col-md-4">
+                <img class="mx-auto d-block" src="{{ Dict.image.url }}" alt="image" width="100%">
+            </div>
+            <div class="card mb-3" style="background-color:white; width:100%; padding:5px; margin-left:5px">
+                <h2>{{ Dict.title }}</h2>
+                <h4>Автор: {{ Dict.author }}</h4>
+                <h4>Категория: {{ Dict.category }}</h4>
+                <p class="text-break"> {{ Dict.description }}</p>
+<!--                <div class="text-wrap">{{ Dict.description }}</div>-->
+            </div>
+        </div>
+        <div class="card mb-3" style="background-color:white; padding:5px; margin-top:5px">
+            <p>Примерное время приготовления: {{ Dict.cooking_time }}</p>
+
+            <p>Ингридиенты:<br> {{ Dict.ingredients }}</p>
+
+            <p>Порядок приготовления:<br> {{ Dict.cooking_steps }}</p>
+        </div>
+
+    <div>
+        <p>Порядок приготовления:</p>
+        {% for key, value in Dict.cooking_steps_new.items %}
+            {% if value %}
+
+                <p>Шаг {{ key }}:</p>
+                <div class="card mb-3" style="background-color:white; padding:5px;">
+                    <p>{{ value }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</article>
+        {% if Dict.author == user %}
+            <div>
+                <a class="btn btn-primary" href="/edit_recipe/{{ Dict.id }}" role="button">Редактировать</a>
+                <a class="btn btn-primary" href="/edit_image/{{ Dict.id }}" role="button">Изменить изображение</a>
+                <a class="btn btn-danger" href="/delete_recipe/{{ Dict.id }}" role="button">Удалить</a>
+            </div>
+        {% endif %}
+
+    {% else %}
+        <h3>Запись находится на модерации</h3>
+    {% endif %}
+
+
+{% endblock %}

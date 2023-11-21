@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h3>{{ message }}</h3>
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+    <div style="width: 50%">
+
+        <div class="d-flex justify-content-between">
+            <div>
+
+                <p>Название блюда</p>
+                {{forms.recipe_form.title}}
+            </div>
+
+            <div>
+                <p>Категория</p>
+                {{forms.recipe_form.category}}
+            </div>
+        </div>
+        <br>
+        <div>
+            <p>{{forms.recipe_form.image.label_tag}}</p>
+            {{forms.recipe_form.image}}
+        </div>
+        <br>
+        <div>
+            <p>Примерное время приготовления</p>
+            {{forms.recipe_form.cooking_time}}
+        </div>
+        <br>
+        <div>
+            <p>Краткое описание</p>
+            {{forms.recipe_form.description}}
+        </div>
+        <br>
+        <div>
+            <p>Ингридиенты</p>
+            {{forms.recipe_form.ingredients}}
+        </div>
+        <br>
+        <div>
+            <p>Порядок приготовления</p>
+            {{forms.recipe_form.cooking_steps}}
+        </div>
+        <br>
+        <div>
+            {% for field in forms.steps_form %}
+            {{field.label_tag}}
+            <details>
+                <summary>Покажи-скрой меня</summary>
+                {{field}}
+            </details>
+            {% endfor %}
+        </div>
+      </div>
+
+    <br>
+    <div class="form-group py-3">
+      <input class="btn btn-outline-primary" type="submit" value="Отправить" />
+    </div>
+</form>
+{% else %}
+  <div class="border-top pt-3">
+    <a class="text-muted" href="#">Already have an account? Log in.</a>
+    <a class="text-muted" href="#">Already have an account? Log in.</a>
+  </div>
+{% endif %}
+
+{% endblock %}
